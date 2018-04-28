@@ -13,13 +13,13 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
 
-@ComponentScan
 @EnableAutoConfiguration
+@ComponentScan
 public class SpringbatchjobApplication {
 
 	public static void main(String[] args) throws JobExecutionAlreadyRunningException, JobRestartException, JobInstanceAlreadyCompleteException, JobParametersInvalidException {
 		SpringApplication app = new SpringApplication(SpringbatchjobApplication.class);
-		app.setWebEnvironment(false);
+		//app.setWebEnvironment(false);
 		ConfigurableApplicationContext ctx = app.run(args);
 		
 		JobLauncher joblauncjer = ctx.getBean(JobLauncher.class);

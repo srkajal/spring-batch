@@ -10,10 +10,15 @@ import org.springframework.batch.core.configuration.annotation.JobBuilderFactory
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
 import org.springframework.batch.core.launch.support.RunIdIncrementer;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerAutoConfiguration;
+import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
+@EnableAutoConfiguration(exclude = {DataSourceAutoConfiguration.class, DataSourceTransactionManagerAutoConfiguration.class, HibernateJpaAutoConfiguration.class})
 @EnableBatchProcessing
 public class BatchConfig {
 
@@ -21,6 +26,15 @@ public class BatchConfig {
 		// TODO Auto-generated constructor stub
 	}
 
+	@Autowired
+	public Reader reader;
+	
+	@Autowired
+	public Processor processor;
+	
+	@Autowired
+	public Writer writer;
+	
 	@Autowired
 	public JobBuilderFactory jobBuilderFactory;
 
@@ -35,8 +49,11 @@ public class BatchConfig {
 
 	@Bean
 	public Step step1() {
-		return stepBuilderFactory.get("step1").<String, String>chunk(1).reader(new Reader()).processor(new Processor())
-				.writer(new Writer()).build();
+		return stepBuilderFactory.get("step1")
+				.<String, String>chunk(1)
+				.reader(reader)
+				.processor(processor)
+				.writer(writer).build();
 	}
 
 }

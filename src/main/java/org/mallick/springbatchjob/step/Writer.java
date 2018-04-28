@@ -3,7 +3,9 @@ package org.mallick.springbatchjob.step;
 import java.util.List;
 
 import org.springframework.batch.item.ItemWriter;
+import org.springframework.stereotype.Component;
 
+@Component
 public class Writer implements ItemWriter<String> {
 
 	public Writer() {

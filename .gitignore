@@ -26,3 +26,5 @@
 wrapper
 /mvnw
 /mvnw.cmd
+*.tar
+*.zip

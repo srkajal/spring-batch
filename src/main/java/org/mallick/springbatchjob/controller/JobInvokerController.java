@@ -9,9 +9,8 @@ import org.springframework.batch.core.repository.JobInstanceAlreadyCompleteExcep
 import org.springframework.batch.core.repository.JobRestartException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
 
-@Controller
+//@Controller
 public class JobInvokerController {
 
 	public JobInvokerController() {
@@ -24,7 +23,7 @@ public class JobInvokerController {
 	@Autowired
 	public Job jobProcess;
 	
-	@RequestMapping("/invokejob")
+	//@RequestMapping("/invokejob")
 	public String handle() throws Exception, JobRestartException, JobInstanceAlreadyCompleteException, JobParametersInvalidException {
 		
 		JobParameters jobParameter = new JobParametersBuilder().addLong("time", System.currentTimeMillis()).toJobParameters();
