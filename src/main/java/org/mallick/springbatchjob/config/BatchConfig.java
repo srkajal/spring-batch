@@ -10,21 +10,17 @@ import org.springframework.batch.core.configuration.annotation.JobBuilderFactory
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
 import org.springframework.batch.core.launch.support.RunIdIncrementer;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
-import org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerAutoConfiguration;
-import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-@EnableAutoConfiguration(exclude = {DataSourceAutoConfiguration.class, DataSourceTransactionManagerAutoConfiguration.class, HibernateJpaAutoConfiguration.class})
+//@EnableAutoConfiguration(exclude = {DataSourceAutoConfiguration.class, DataSourceTransactionManagerAutoConfiguration.class, HibernateJpaAutoConfiguration.class})
 @EnableBatchProcessing
 public class BatchConfig {
 
-	public BatchConfig() {
+	/*public BatchConfig() {
 		// TODO Auto-generated constructor stub
-	}
+	}*/
 
 	@Autowired
 	public Reader reader;
@@ -41,9 +37,12 @@ public class BatchConfig {
 	@Autowired
 	public StepBuilderFactory stepBuilderFactory;
 
+	@Autowired
+	public JobCompletionNotificationListener listener;
+
 	@Bean
-	public Job job(JobCompletionNotificationListener listener) {
-		return jobBuilderFactory.get("job1").incrementer(new RunIdIncrementer()).listener(listener).flow(step1()).end().build();
+	public Job job(Step step1) {
+		return jobBuilderFactory.get("job1").incrementer(new RunIdIncrementer()).listener(listener).flow(step1).end().build();
 
 	}
 
