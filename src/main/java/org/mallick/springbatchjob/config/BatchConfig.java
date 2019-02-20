@@ -23,7 +23,6 @@ import org.springframework.context.annotation.Configuration;
 public class BatchConfig {
 
 	public BatchConfig() {
-		// TODO Auto-generated constructor stub
 	}
 
 	@Autowired
