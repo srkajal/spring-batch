@@ -13,6 +13,11 @@ public class JobCompletionNotificationListener extends JobExecutionListenerSuppo
 	}
 
 	@Override
+	public void beforeJob(JobExecution jobExecution) {
+		System.out.println("Job started");
+	}
+
+	@Override
 	public void afterJob(JobExecution jobExecution) {
 		// TODO Auto-generated method stub
 		//super.afterJob(jobExecution);
